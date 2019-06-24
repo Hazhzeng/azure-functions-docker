@@ -2,10 +2,10 @@ FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS runtime-image
 
 ENV PublishWithAspNetCoreTargetManifest=false
 ENV HOST_VERSION=2.0.12490
-ENV HOST_COMMIT=47c594d8ba823cf5a2db5475fbfcbb6d83e7deca
+ENV HOST_COMMIT=hazeng-stage
 
 RUN BUILD_NUMBER=$(echo $HOST_VERSION | cut -d'.' -f 3) && \
-    wget https://github.com/Azure/azure-functions-host/archive/$HOST_COMMIT.tar.gz && \
+    wget https://github.com/Hazhzeng/azure-functions-host/archive/$HOST_COMMIT.tar.gz && \
     tar xzf $HOST_COMMIT.tar.gz && \
     cd azure-functions-host-* && \
     dotnet publish -v q /p:BuildNumber=$BUILD_NUMBER /p:CommitHash=$HOST_COMMIT src/WebJobs.Script.WebHost/WebJobs.Script.WebHost.csproj --output /azure-functions-host --runtime linux-x64 && \

@@ -1,13 +1,13 @@
-ARG BASE_IMAGE=mcr.microsoft.com/azure-functions/python:2.0
+ARG BASE_IMAGE=local/azure-functions-python:dev-nightly
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS installer-env
 
 ENV PublishWithAspNetCoreTargetManifest=false \
     HOST_VERSION=2.0.12493 \
-    HOST_COMMIT=038b9af16af85a15d89a119295599423d3651d5a
+    HOST_COMMIT=hazeng-stage
 
 RUN BUILD_NUMBER=$(echo $HOST_VERSION | cut -d'.' -f 3) && \
-    wget https://github.com/Azure/azure-functions-host/archive/$HOST_COMMIT.tar.gz && \
+    wget https://github.com/Hazhzeng/azure-functions-host/archive/$HOST_COMMIT.tar.gz && \
     tar xzf $HOST_COMMIT.tar.gz && \
     cd azure-functions-host-* && \
     dotnet publish -v q /p:BuildNumber=$BUILD_NUMBER /p:CommitHash=$HOST_COMMIT src/WebJobs.Script.WebHost/WebJobs.Script.WebHost.csproj --runtime debian.9-x64 --output /azure-functions-host
