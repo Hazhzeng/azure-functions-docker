@@ -5,8 +5,8 @@ ENV LANG=C.UTF-8 \
     AzureWebJobsScriptRoot=/home/site/wwwroot \
     HOME=/home \
     FUNCTIONS_WORKER_RUNTIME=python \
-    WORKER_TAG=1.0.0b8 \
-    AZURE_FUNCTIONS_PACKAGE_VERSION=1.0.0b4 \
+    WORKER_TAG=dev \
+    AZURE_FUNCTIONS_PACKAGE_VERSION=1.0.0b5 \
     ASPNETCORE_URLS=http://+:80 \
     DOTNET_RUNNING_IN_CONTAINER=true
 
@@ -28,11 +28,12 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y unixodbc msodbcsql17 mssql-tools && \
     wget --quiet https://github.com/Azure/azure-functions-python-worker/archive/$WORKER_TAG.tar.gz && \
+    pip install $WORKER_TAG.tar.gz && \
     tar xvzf $WORKER_TAG.tar.gz && \
     mv azure-functions-python-worker-* azure-functions-python-worker && \
     mv /azure-functions-python-worker/python /python && \
     rm -rf $WORKER_TAG.tar.gz /azure-functions-python-worker && \
-    pip install azure-functions==$AZURE_FUNCTIONS_PACKAGE_VERSION azure-functions-worker==$WORKER_TAG && \
+    pip install azure-functions==$AZURE_FUNCTIONS_PACKAGE_VERSION && \
     # .NET Core dependencies
     apt-get install -y --no-install-recommends ca-certificates \
     libc6 libgcc1 libgssapi-krb5-2 libicu57 liblttng-ust0 libssl1.0.2 libstdc++6 zlib1g && \
