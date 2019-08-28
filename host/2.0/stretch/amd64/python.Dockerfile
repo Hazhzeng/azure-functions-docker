@@ -1,5 +1,5 @@
-ARG BASE_IMAGE=mcr.microsoft.com/azure-functions/base:2.0
-ARG BASE_PYTHON_IMAGE=mcr.microsoft.com/azure-functions/python:2.0-python3.6-deps
+ARG BASE_IMAGE=local/azure-functions-base:dev
+ARG BASE_PYTHON_IMAGE=local/azure-functions-python-deps:dev
 FROM ${BASE_IMAGE} as runtime-image
 ARG BASE_PYTHON_IMAGE
 FROM ${BASE_PYTHON_IMAGE}

@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=mcr.microsoft.com/azure-functions/python:2.0.12564.1
+ARG BASE_IMAGE=local/azure-functions-base:dev
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS installer-env
 
